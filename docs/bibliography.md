@@ -21,6 +21,10 @@ specific texts listed.
 
 1. [Cheap FPGA Development Boards](https://joelw.id.au/FPGA/CheapFPGADevelopmentBoards)
 
+1. [Verilog HDL Quick Reference Guide](http://sutherland-hdl.com/pdfs/verilog_2001_ref_guide.pdf)
+
+1. [Standard Gotchas: Subtleties in the Verilog and System Verilog Standards that every engineer should know](http://www.lcdm-eng.com/papers/snug06_Verilog%20Gotchas%20Part1.pdf)
+
 ### Xilinx
 
 1. [Xilinx 7 Series FPGAs Datasheet: Overview](https://www.xilinx.com/support/documentation/data_sheets/ds180_7Series_Overview.pdf)
