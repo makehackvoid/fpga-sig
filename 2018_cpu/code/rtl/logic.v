@@ -1,5 +1,4 @@
 `timescale 1ns / 1ps
-`include "defines.vh"
 
 // Description: Logic module for the ALU.
 // Version: Vivado 2017.1

@@ -24,6 +24,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+`ifndef _defines_vh_
+`define _defines_vh_
+
 //
 // ALU Operation Codes
 //
@@ -42,7 +45,6 @@
 
 `define ALUOP_PASSB 4'b1100
 
-
 `define AMUX_RD     2'b00
 
 //
@@ -51,3 +53,5 @@
 `define BMUX_RR     2'b00
 `define BMUX_K      2'b01
 `define BMUX_1      2'b10
+
+`endif // _defines_vh_
