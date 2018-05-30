@@ -28,27 +28,35 @@
 // SOFTWARE.
 
 module logic_tb;
-    parameter TESTS = 8;
 
-    integer        errors;
-    integer        test;
+    parameter TESTS = 8;                  // Number of unit tests
 
-    // Test data, inputs and expected outputs
-	reg     [19:0] in_vec [TESTS-1:0];    // [19:16] fn, [15:8] a, [7:0] b
-	reg     [11:0] out_vec [TESTS-1:0];   // s, v, n, z, [7:0] sum
+    integer        errors;                // # of failing tests
+    integer        test;                  // current test #
+
+    //
+    // Test data - inputs and expected outputs
+    //
+	reg     [19:0] in_vec [TESTS-1:0];    // 4 bits ([19:16]) are ALU operation code
+                                          // 8 bits ([15:8]) are ALU argument a
+                                          // 8 bits ([7:0]) are ALU argument b
+	reg     [11:0] out_vec [TESTS-1:0];   // 4 bits ([11:8]) are flags s, v, n, z
+                                          // 8 bits ([7:0]) are sum (ALU output)
     
-	// Inputs
+	// Inputs to logic module
     reg     [1:0]  fn;
     reg     [7:0]  a;
     reg     [7:0]  b;
 
-	// Outputs
+	// Outputs from logic module
     wire    [7:0]  sum;
     wire    [3:0]  flags;    // s, v, n, z;
 
+    wire           ok;
+
 	// Instantiate the Unit Under Test (UUT)
 	logic uut (
-	    .fn(fn[1:0]),
+	    .fn(fn),
 		.a(a),
 		.b(b),
 		.sum(sum),
@@ -58,37 +66,36 @@ module logic_tb;
 		.z(flags[0])
 	);
 
-    initial
-    begin
-        // Test 0 - AND 0 & 0
+    initial begin
+        // Test 0 - AND 0 & 0                     - zero result, Z asserted
         in_vec[0] = { `ALUOP_AND, 8'h00, 8'h00 };
         out_vec[0] = { 4'b0001, 8'h00 };
         
-        // Test 1 - AND 0xf0 & 0xa5
+        // Test 1 - AND 0xf0 & 0xa5               - mask off low order bits
         in_vec[1] = { `ALUOP_AND, 8'hf0, 8'ha5 };
         out_vec[1] = { 4'b1010, 8'ha0 };
         
-        // Test 2 - OR 0 | 0
+        // Test 2 - OR 0 | 0                      - zero result, Z asserted
         in_vec[2] = { `ALUOP_OR, 8'h00, 8'h00 };
         out_vec[2] = { 4'b0001, 8'h00 };
         
-        // Test 3 - OR 0x5a | 0xa5
+        // Test 3 - OR 0x5a | 0xa5                - alternating 0's and 1's
         in_vec[3] = { `ALUOP_OR, 8'h5a, 8'ha5 };
         out_vec[3] = { 4'b1010, 8'hff };
         
-        // Test 4 - OR 0xa5 | 0xa5
+        // Test 4 - OR 0x07 | 0x15                - some values overlap             
         in_vec[4] = { `ALUOP_OR, 8'h07, 8'h15 };
         out_vec[4] = { 4'b0000, 8'h17 };
         
-        // Test 5 - XOR 0 ^ 0
+        // Test 5 - XOR 0 ^ 0                     - zero result, Z asserted
         in_vec[5] = { `ALUOP_XOR, 8'h00, 8'h00 };
         out_vec[5] = { 4'b0001, 8'h00 };
         
-        // Test 6 - XOR 0 ^ 0xff
+        // Test 6 - XOR 0 ^ 0xff                  - invert all bits
         in_vec[6] = { `ALUOP_XOR, 8'h00, 8'hff };
         out_vec[6] = { 4'b1010, 8'hff };
         
-        // Test 7 - XOR 0xff ^ 0xff
+        // Test 7 - XOR 0xff ^ 0xff               -- clear all bits
         in_vec[7] = { `ALUOP_XOR, 8'hff, 8'hff };
         out_vec[7] = { 4'b0001, 8'h00 };
     end
@@ -99,15 +106,17 @@ module logic_tb;
        #10;
 
        for (test = 0; test < TESTS; test = test + 1) begin
-           fn = in_vec[test][19:16];
+           fn = in_vec[test][17:16];    // Top 2 bits not required, already know this is for the logic unit
            a = in_vec[test][15:8];
            b = in_vec[test][7:0];
 	       #10;
 	       if ((out_vec[test][11:8] !== flags) || (out_vec[test][7:0] !== sum)) begin
+               ok = 1'bx;
                errors = errors + 1;
                $display($time, " *** ERROR - Test %d failed *** - cout (e)%b (a)%b, sum (e)%b (a)%b", test, out_vec[test][11:8], flags, out_vec[test][7:0], sum);
            end
            else begin
+               ok = 1'b1;
                $display($time, " Test %d ok", test);
            end    
        end
