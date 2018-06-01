@@ -52,7 +52,7 @@ module logic_tb;
     wire    [7:0]  sum;
     wire    [3:0]  flags;    // s, v, n, z;
 
-    wire           ok;
+    reg            ok;
 
 	// Instantiate the Unit Under Test (UUT)
 	logic uut (
@@ -109,15 +109,20 @@ module logic_tb;
            fn = in_vec[test][17:16];    // Top 2 bits not required, already know this is for the logic unit
            a = in_vec[test][15:8];
            b = in_vec[test][7:0];
-	       #10;
-	       if ((out_vec[test][11:8] !== flags) || (out_vec[test][7:0] !== sum)) begin
+
+           #1;
+	       if ((out_vec[test][11:8] == flags) && (out_vec[test][7:0] == sum))
+               ok = 1'b1;
+           else
                ok = 1'bx;
-               errors = errors + 1;
-               $display($time, " *** ERROR - Test %d failed *** - cout (e)%b (a)%b, sum (e)%b (a)%b", test, out_vec[test][11:8], flags, out_vec[test][7:0], sum);
+ 
+	       #9;
+	       if (ok == 1'b1) begin
+               $display($time, " Test %d ok", test);
            end
            else begin
-               ok = 1'b1;
-               $display($time, " Test %d ok", test);
+               errors = errors + 1;
+               $display($time, " *** ERROR - Test %d failed *** - cout (e)%b (a)%b, sum (e)%b (a)%b", test, out_vec[test][11:8], flags, out_vec[test][7:0], sum);
            end    
        end
        
