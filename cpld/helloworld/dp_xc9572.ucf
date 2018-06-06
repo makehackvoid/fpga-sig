@@ -1,0 +1,73 @@
+#
+# Template UCF for Dangerous Prototypes XC9572XL breakout board.
+#
+# I found the DP schematic difficult to read due to the
+# author naming each pin twice, e.g. IO1-2 aka BANK1_0.
+#
+# To make things simpler I have stuck with the first name i.e. the
+# one that incorporates the function block number and macro cell.
+#
+# Stephen Davies
+# 6 June, 2018
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+NET "PB"            LOC = "P18" ;  # IO3-16 BANK1_16
+NET "D1"            LOC = "P39" ;  # IO1-2  BANK1_0
+NET "D2"            LOC = "P38" ;  # IO2-17 BANK2_0
+
+# Function block 1
+#NET "IO1-5"         LOC = "P40" ;  # IO1-5  BANK1_1
+#NET "IO1-6"         LOC = "P41" ;  # IO1-6  BANK1_2
+#NET "IO1-8"         LOC = "P42" ;  # IO1-8  BANK1_3
+#NET "IO1-9"         LOC = "P43" ;  # IO1-9  BANK1_4 GCK1
+#NET "IO1-11"        LOC = "P44" ;  # IO1-11 BANK1_5 GCK2
+#NET "IO1-14"        LOC = "P1" ;   # IO1-14 BANK1_6 GCK3 (optional crystal)
+#NET "IO1-15"        LOC = "P2" ;   # IO1-15 BANK1_7
+#NET "IO1-17"        LOC = "P3" ;   # IO1-17 BANK1_8
+
+# Function Block 2
+#NET "IO2-2"        LOC = "P29" ;   # IO2-2  BANK2_8
+#NET "IO2-5"        LOC = "P30" ;   # IO2-5  BANK2_7
+#NET "IO2-6"        LOC = "P31" ;   # IO2-6  BANK2_6
+#NET "IO2-8"        LOC = "P32" ;   # IO2-8  BANK2_5
+#NET "IO2-9"        LOC = "P33" ;   # IO2-9  BANK2_4 GSR
+#NET "IO2-11"       LOC = "P34" ;   # IO2-11 BANK2_3 GTS2
+#NET "IO2-14"       LOC = "P36" ;   # IO2-14 BANK2_2 GTS1
+#NET "IO2-15"       LOC = "P37" ;   # IO2-15 BANK2_1
+
+# Function Block 3
+#NET "IO3-2"        LOC = "P5" ;    # IO3-2  BANK1_9
+#NET "IO3-5"        LOC = "P6" ;    # IO3-5  BANK1_10
+#NET "IO3-8"        LOC = "P7" ;    # IO3-8  VCC_IO (hardwired to VCC_IO)
+#NET "IO3-9"        LOC = "P8" ;    # IO3-9  BANK1_11
+#NET "IO3-11"       LOC = "P12" ;   # IO3-11 BANK1_12
+#NET "IO3-14"       LOC = "P13" ;   # IO3-14 BANK1_13
+#NET "IO3-15"       LOC = "P14" ;   # IO3-15 BANK1_14
+#NET "IO3-16"       LOC = "P18" ;   # IO3-16 BANK1_16
+#NET "IO3-17"       LOC = "P16" ;   # IO3-17 BANK1_15
+
+# Function Block 4
+#NET "IO4-2"        LOC = "P19" ;   # IO4-2  BANK2_15
+#NET "IO4-5"        LOC = "P20" ;   # IO4-5  BANK2_14
+#NET "IO4-8"        LOC = "P21" ;   # IO4-8  BANK2_13
+#NET "IO4-11"       LOC = "P22" ;   # IO4-11 BANK2_12
+#NET "IO4-14"       LOC = "P23" ;   # IO4-14 BANK2_11
+#NET "IO4-15"       LOC = "P27" ;   # IO4-15 BANK2_10
+#NET "IO4-17"       LOC = "P28" ;   # IO4-17 BANK2_9
