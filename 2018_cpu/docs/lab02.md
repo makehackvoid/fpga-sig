@@ -1,4 +1,5 @@
 # Lab 02 - Vivado Project Creation
+
 Created: 31 May 2018
 
 Updated: 31 May 2018
@@ -34,6 +35,7 @@ repository. If you copied them from the flash drive then look where
 you copied them to. The base path is **&lt;base dir&gt;**/2018_cpu/code.
 
 Copy the following directories into your project root:
+
 * include
 * rtl
 * testbench
@@ -65,8 +67,7 @@ the same way that .h files do in a C language project.
 
 As a final step we need to mark the header file as a global include file.
 
-1. In the Sources panel select the defines.vh file -> the Source File Properties
-contains details for the selected file
+1. In the Sources panel select the defines.vh file -> the Source File Properties contains details for the selected file
 1. In the Source File Properties panel locate the tab buttons, they run along the bottom
 1. Click the Properties button -> file properties update
 1. Check the box marked IS_GLOBAL_INCLUDE

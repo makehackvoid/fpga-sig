@@ -1,4 +1,5 @@
 # Lab 01a - Local Repository Installation (optional)
+
 Created: 31 May 2018
 
 Updated: 31 May 2018
@@ -10,16 +11,16 @@ As an alternative you can simply check them out from GitHub. The choice is yours
 If you decide to go down the GitHub route then you may need to install the Git
 client software.
 
-## Git 
+## Git
 
 ### Windows/Linux Client
 
-Browse to https://git-scm.com/downloads and follow the download and install
+Browse to <https://git-scm.com/downloads> and follow the download and install
 instructions there.
 
 ### OSX/MacOS
 
-If you're using OSX/MacOS and XCode then Git is probably 
+If you're using OSX/MacOS and XCode then Git is probably
 installed. Try running `git` in a Terminal window.
 
 Otherwise follow the steps for Windows/Linux above.
@@ -27,6 +28,7 @@ Otherwise follow the steps for Windows/Linux above.
 ## Local Repository Setup
 
 Once Git client software is installed you need to:
+
   1. Figure out where to put it
   1. Clone the repository
 

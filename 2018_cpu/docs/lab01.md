@@ -1,4 +1,5 @@
 # Lab 01 - Software Installation
+
 Created: 29 May 2018
 
 Updated: 29 May 2018
@@ -23,12 +24,12 @@ ok but is a little slow, even with the basics.
 
 ## Create Account
 
-Navigate to http://www.xilinx.com and click on the person head icon in the top centre
+Navigate to <http://www.xilinx.com> and click on the person head icon in the top centre
 of the screen. Enter your personal details and a password. This may involve some to and fro with emails etc. My account is several years old and I skipped this bit.
 
 ## Download
 
-The downloads section is found nested under Support > Downloads & Licencing.
+The downloads section is found nested under Support > Services > Downloads & Licencing.
 You should be able to see several links related to "Vivado design Suite - HLx 
 Editions".
 
