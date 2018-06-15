@@ -35,7 +35,7 @@ module logic(
     );
 
     // Modify this procedure, extending the decoder logic i.e. more case items and statements
-    always @(fn, a, b)
+    always @*
         case (fn)
             default: sum = 8'b0;
         endcase
