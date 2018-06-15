@@ -1,7 +1,8 @@
 # Xilinx
+
 Created: 22 May 2018
 
-Updated: 22 May 2018
+Updated: 15 June 2018
 
 ## Overview
 
@@ -42,8 +43,8 @@ Xilinx will not be releasing any further updates.
 
 ## Xilinx Documentation Releases
 
-Xilinx documentation is commonly identified by a short code formatted AANNN<N>.
-Where AA represents two letters and NNN<N> is three or four digits. For example
+Xilinx documentation is commonly identified by a short code formatted AANNN&lt;N&gt;.
+Where AA represents two letters and NNN&lt;N&gt; is three or four digits. For example
 DS180, UG973.
 
 Documentation is frequently updated, sometimes several times in a single year.

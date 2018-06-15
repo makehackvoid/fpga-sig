@@ -1,7 +1,8 @@
 # Bibliography
+
 Created: 21 May 2018
 
-Updated: 22 May 2018
+Updated: 15 June 2018
 
 Books and articles of *general* interest to FPGA developers.
 Individual projects should have their own bibliographies with more

@@ -1,7 +1,8 @@
 # Board Guide
+
 Created: 22 May 2018
 
-Updated: 22 May 2018
+Updated: June 15 2018
 
 FPGA development boards are expensive. What are some of the things you
 need to consider when making a purchase?
@@ -20,7 +21,7 @@ What features should I be looking for in a board?
 
 ### Installed Device
 
-FPGAs are generally large TQFP or BGA type devices. Not something that can or should 
+FPGAs are generally large TQFP or BGA type devices. Not something that can or should
 be upgraded by a hobbyist. With no upgrade path you need to get this right or face
 buying another board.
 
@@ -69,7 +70,7 @@ XC3S1000 is at the higher end of the Spartan 3 family.
 
 An Artix has plenty of grunt for hobbyists. My Hammond Organ synth project
 is based around a Digilent Arty A7 board (XC7A35T).
-It uses 61% of the available logic slices (33,280). Block RAM utilisation 
+It uses 61% of the available logic slices (33,280). Block RAM utilisation
 is 43% of 1,800k. It uses two clock management tiles and a single DSP slice.
 Most of the space is taken up by a Microblaze processor and its support logic.
 
@@ -98,6 +99,7 @@ etc.
 ### Programming Method
 
 Two questions in this category:
+
 1. Does the board require an external programmer?
 2. If on-board programming is available does it integrate with Vivado?
 
@@ -126,7 +128,7 @@ Curious hobbyists looking to save some money may find a bargain. Do your homewor
 
 USD 75/89 (XC7A15T/XC7A35T).
 
-A budget option, very minimalist. Designed to mount on a breadboard, it has 48 
+A budget option, very minimalist. Designed to mount on a breadboard, it has 48
 pins arranged in the standard 0.6" DIL pattern. Has 2 LEDs, 1 RGB LED, 2 pushbuttons
 and 1 PMod connector. Programmer is on-board.
 
@@ -150,7 +152,7 @@ NB. board IO voltage is 3V3, many shields may not work.
 USD 149 (academic pricing available).
 
 Nice board at a fair price, better if you qualify for academic pricing.
-Based around the Artix XC7A35T, the board has *lots* of 
+Based around the Artix XC7A35T, the board has *lots* of
 switches, LEDs, a 4 digit, seven segment display, VGA and USB.
 4 PMod sockets makes it easily expandable.
 There is an on-board programmer that integrates with Vivado.
