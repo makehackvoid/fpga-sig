@@ -1,0 +1,32 @@
+# Lab 03 - ALU Logic Module
+
+Created: 15 June 2018
+
+Updated: 15 June 2018
+
+The aim of this exercise is to implement a basic combinational circuit. You were given
+a template ALU logic module and its matching testbench in the previous lab. Now you
+need to make all the tests in the testbench pass.
+
+You don't need to over think this exercise. The solution involves adding a few extra
+items to the **case** statment.
+
+[Verilog HDL Quick Reference Guide](http://sutherland-hdl.com/pdfs/verilog_2001_ref_guide.pdf)
+
+## Steps
+
+1. Begin editing the logic.v file
+1. Locate the **case** statement, there is only one of them
+1. Add a case item for the **OR** function, hint: use a binary literal
+1. Add a statement to calcuate the bitwise OR of inputs **a** and **b**
+1. Add a case item for the **XOR** function, hint: use a binary literal
+1. Add a statement to calcuate the bitwise XOR of inputs **a** and **b**
+1. Alter the default statement, have it calculate the bitwise AND of inputs **a** and **b**
+
+## Run Simulation
+
+1. Locate the Flow Navigator (LHS)
+1. Locate the item *Run Simulation*
+1. Click Run Simulation -> a context menu opens
+1. Click Run Behaviorial Simulation -> Simulation window opens, scope visible
+1. Find the **ok** signal, it should be green for each of the test cases
