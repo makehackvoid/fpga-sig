@@ -12,7 +12,7 @@ binary constants with human readable symbolic equivalents.
 ## Steps
 
 1. Open the defines.vh file
-1. In defines.vh, look at lines 53-57, these are the values you need
+1. In defines.vh, look at lines 53-57, these are the values you will need
 1. Open the logic.v file
 1. Add a new line at the top (line 2) to include defines.vh
 1. In the body of your logic.v rewrite the case statement labels to use symbolic value names (don't forget the backtick character)
