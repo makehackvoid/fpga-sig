@@ -29,7 +29,7 @@
 
 module logic_tb;
 
-    parameter TESTS = 8;                  // Number of unit tests
+    parameter TESTS = 10;                  // Number of unit tests
 
     integer        errors;                // # of failing tests
     integer        test;                  // current test #
@@ -98,6 +98,14 @@ module logic_tb;
         // Test 7 - XOR 0xff ^ 0xff               -- clear all bits
         in_vec[7] = { `ALUFN_XOR, 8'hff, 8'hff };
         out_vec[7] = { 4'b0001, 8'h00 };
+        
+        // Test 8 - PASSB 0xa5, 0                 -- zero result, Z asserted
+        in_vec[8] = { `ALUFN_PASSB, 8'ha5, 8'h00 };
+        out_vec[8] = { 4'b0001, 8'h00 };
+        
+        // Test 9 - PASSB 0x7e, 0xa5              -- different results for AND, OR, XOR and PASS 
+        in_vec[9] = { `ALUFN_PASSB, 8'h7e, 8'ha5 };
+        out_vec[9] = { 4'b1010, 8'ha5 };
     end
 
 	initial begin

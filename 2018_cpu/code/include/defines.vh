@@ -54,12 +54,12 @@
 `define ALUFN_AND   2'b00
 `define ALUFN_OR    2'b01
 `define ALUFN_XOR   2'b10
+`define ALUFN_PASSB 2'b11
 // shift
 `define ALUFN_ASR   2'b00
 `define ALUFN_LSR   2'b01
 `define ALUFN_ROR   2'b10
 // misc
-`define ALUFN_PASSB 2'b00
 
 // putting it all together...
 `define ALUOP_ADD	{ `ALU_MATH, `ALUFN_ADD }
@@ -70,12 +70,11 @@
 `define ALUOP_AND   { `ALU_LOGIC, `ALUFN_AND }
 `define ALUOP_OR    { `ALU_LOGIC, `ALUFN_OR }
 `define ALUOP_XOR   { `ALU_LOGIC, `ALUFN_XOR }
+`define ALUOP_PASSB { `ALU_LOGIC, `ALUFN_PASSB }
 
 `define ALUOP_ASR   { `ALU_SHIFT, `ALUFN_ASR }
 `define ALUOP_LSR   { `ALU_SHIFT, `ALUFN_LSR }
 `define ALUOP_ROR   { `ALU_SHIFT, `ALUFN_ROR }
-
-`define ALUOP_PASSB { `ALU_MISC, `ALUFN_PASSB }
 
 `define AMUX_RD     2'b00
 
