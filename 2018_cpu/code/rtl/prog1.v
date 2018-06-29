@@ -49,7 +49,7 @@ module prog1(
             4'h0: dout = 16'hea05; // ldi  r16,0xa5           ; r16 = 0xa5
             4'h1: dout = 16'he01f; // ldi  r17,0x0f           ; r17 = 0x0f
             4'h2: dout = 16'h2301; // and  r16,r17            ; r16 = 0x05
-
+/*
                                    // Stage 1.1
             4'h3: dout = 16'h7f00; // andi r16,0xf0           ; r16 = 0
             4'h4: dout = 16'h2e00; // mov  r0, r16            ; r0  = 0
@@ -62,6 +62,7 @@ module prog1(
             4'hb: dout = 16'h6005; // ori  r16,0x05           ; r16 = 0x05
             4'hc: dout = 16'h6a10; // ori  r17,0xa0           ; r17 = 0xa0
             4'hd: dout = 16'h2b01; // or   r16,r17            ; r16 = 0xa5
+*/
             default: dout = 16'h0000; // nop
         endcase
 
