@@ -4,7 +4,7 @@
 // Version: Vivado 2017.1
 // File:    pc.v
 // Author:  Stephen Davies
-// Created: 29 June 2018
+// Created: 30 June 2018
 //
 // Copyright (c) 2018 Stephen Davies
 //
@@ -29,10 +29,13 @@
 module pc (
     input                  clk,
     input                  reset,
-    // Fill in here
+    output reg [3:0]       pc
     );
 
-    // And here
-    // Hint: Use Vivado code example template
-
+    always @(posedge clk)
+        if (reset)
+            pc <= 0;
+        else
+            pc <= pc + 1;
+ 
 endmodule

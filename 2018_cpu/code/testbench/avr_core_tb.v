@@ -28,4 +28,34 @@
 
 module avr_core_tb;
 
+    parameter PERIOD = 10;     // Clock period in ns
+    parameter PC_WIDTH = 4;    // Counter width in bits
+
+    reg                 clk;
+    reg                 reset;
+    wire [PC_WIDTH-1:0] pc;
+    wire [15:0]         instruction;
+
+	initial begin
+        clk = 1'b1;
+	    reset = 1'b1;
+	    #(1.1*PERIOD)
+	    reset = 1'b0;
+	end
+			
+    always begin
+        #(PERIOD/2) clk = ~clk;
+    end
+	
+    pc u1 (
+        .clk(clk),
+        .reset(reset),
+        .pc(pc)
+    );
+
+    prog1 u2 (
+        .a(pc),
+        .dout(instruction)
+    );
+
 endmodule

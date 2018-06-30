@@ -4,7 +4,7 @@
 // Version: Vivado 2017.1
 // File:    pc_tb.v
 // Author:  Stephen Davies
-// Created: 29 June 2018
+// Created: 30 June 2018
 //
 // Copyright (c) 2018 Stephen Davies
 //
@@ -28,8 +28,8 @@
 
 module pc_tb;
 
-    parameter PERIOD = 10;     // Clock period in ns
-    parameter PC_WIDTH = 4;    // Counter width in bits
+    parameter PERIOD = 10;      // Clock period in ns
+    parameter PC_WIDTH = 4;     // Counter width in bits
 
     reg                 clk;
     reg                 reset;
@@ -38,12 +38,9 @@ module pc_tb;
 	initial begin
         clk = 1'b1;
 	    reset = 1'b1;
-        // Delay 1 clock cycle to sync reset with rising edge
-        // plus 'fudge' a little extra to simulate propagation delay
 	    #(1.1*PERIOD) reset = 1'b0;
 	end
-
-    // invert clk every half cycle			
+			
     always begin
         #(PERIOD/2) clk = ~clk;
     end
