@@ -51,7 +51,7 @@ the tool set.
 1. Add it to the Vivado project as a design source
 1. Mark it as the top module (Mark as Top)
 1. Edit register_file_tb.v
-1. Modify the device instanciation for DUT to use the alternate version
+1. Modify the device instantiation for DUT to use the alternate version
 1. Run behavioural simulation
 1. Run synthesis, open the synthesised design when prompted
 1. Open the schematic
