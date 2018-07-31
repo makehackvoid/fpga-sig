@@ -1,10 +1,11 @@
 `timescale 1ns / 1ps
+`include "defines.vh"
 
-// Description: Unit test the AVR core module.
+// Description: AVR processor core.
 // Version: Vivado 2017.1
-// File:    pc_tb.v
+// File:    avr_core.v
 // Author:  Stephen Davies
-// Created: 29 June 2018
+// Created: 31 July 2018
 //
 // Copyright (c) 2018 Stephen Davies
 //
@@ -26,43 +27,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-module avr_core_tb;
-
-    parameter PERIOD = 10;     // Clock period in ns
-    parameter PC_WIDTH = 4;    // Counter width in bits
-
-    reg                 clk;
-    reg                 reset;
-    wire [PC_WIDTH-1:0] pc;            // program counter
-    wire [15:0]         instruction;   // current instruction
-    wire  [5:0]         opcode;        // high order instruction bits (6)
-    wire  [4:0]         rf1;           // register 1 (R/W)
-    wire  [4:0]         rf2;           // register 2 (R)
-    wire  [7:0]         a;             // ALU input a
-    wire  [7:0]         b;             // ALU input b
-    wire  [7:0]         sum;           // ALU output
-    
-	initial begin
-        clk = 1'b1;
-	    reset = 1'b1;
-	    #(1.01*PERIOD) reset = 1'b0;
-	end
-			
-    always begin
-        #(PERIOD/2) clk = ~clk;
-    end
-
-    avr_core DUT (
-        .clk(clk),
-        .reset(reset),
-        .pc(pc),
-        .instruction(instruction),
-        .opcode(opcode),
-        .rf1(rf1),
-        .rf2(rf2),
-        .a(a),
-        .b(b),
-        .sum(sum)
+module avr_core(
+    input               clk,
+    input               reset,
+    output  [3:0]       pc,
+    output [15:0]       instruction,
+    output  [5:0]       opcode,
+    output  [4:0]       rf1,
+    output  [4:0]       rf2,
+    output  [7:0]       a,
+    output  [7:0]       b,
+    output  [7:0]       sum
     );
+
+    wire    [4:0]       rd;
+    wire    [4:0]       rr;
+    
+    // TODO - instantiate a program counter as U1
+
+    // TODO - instantiate a program ROM as U2
+
+    // Opcode is top 6 bits of the instruction
+    assign opcode = instruction[15:10];
+
+    // Register addresses from register direct format instructions     
+    assign rd = instruction[8:4]; 
+    assign rr = { instruction[9], instruction[3:0] };  // concatenation
+
+    // TODO - instantiate a control ROM as U3
+
+    assign rf1 = rd;
+    assign rf2 = rr;
+    
+    // TODO - instantiate a register file as U4
+    
+    // TODO - instantiate a simplified ALU (logic) as U5
 
 endmodule
