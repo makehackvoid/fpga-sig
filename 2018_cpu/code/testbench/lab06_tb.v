@@ -46,22 +46,14 @@ module lab06_tb;
 
     // Stimulus matches example shown in workshop slides
     initial begin
-        #7
-        d = 1'b1;
-        #10
-        d = 1'b0;
-        #10
-        d = 1'b1;
-        #5
-        d = 1'b0;
-        #4
-        d = 1'b1;
-        #2
-        d = 1'b0;
-        #4
-        d = 1'b1;
-        #4
-        d = 1'b0;
+        #7   d = 1'b1;
+        #10  d = 1'b0;
+        #10  d = 1'b1;
+        #5   d = 1'b0;
+        #4   d = 1'b1;
+        #2   d = 1'b0;
+        #4   d = 1'b1;
+        #4   d = 1'b0;
     end
 
     always @(posedge clk)
