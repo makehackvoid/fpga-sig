@@ -32,3 +32,29 @@ operations work.
 1. Walkthrough the testbench for test sequence #2, matching the test code with
    the simulated waveform over the interval 190-490ns
 1. Why does *dout1* appear to 'glitch' every 100ns?
+
+## Synthesis
+
+1. Run synthesis, open the synthesised design when prompted
+1. Open the schematic
+1. In the Synthesis menu (LHS), run the utilization report (Report Utilization)
+1. How many LUTs are used?
+1. How many slice registers are used?
+1. Is there anything special about the number of registers?
+
+## Alternate Design (Optional)
+
+FPGA synthesis can be a bit of an art form and it pays to know your device and
+the tool set.
+
+1. Locate the rtl/register_file2.v file
+1. Add it to the Vivado project as a design source
+1. Mark it as the top module (Mark as Top)
+1. Edit register_file_tb.v
+1. Modify the device instanciation for DUT to use the alternate version
+1. Run behavioural simulation
+1. Run synthesis, open the synthesised design when prompted
+1. Open the schematic
+1. In the Synthesis menu (LHS), run the utilization report (Report Utilization)
+1. How many LUTs are used?
+1. How many slice registers are used?
