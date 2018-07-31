@@ -37,23 +37,23 @@ module register_file(
     output     [7:0]  dout2
     );
 
-   reg [7:0] regfile [31:0];
+    reg [7:0] regfile [31:0];
 
-   assign dout1 = regfile[add1];
-   assign dout2 = regfile[add2];
+    assign dout1 = regfile[add1];
+    assign dout2 = regfile[add2];
 
-   always @(posedge clk)
-       if (reset) begin
-	       regfile[0] <= 0;  regfile[1] <= 0;  regfile[2] <= 0;  regfile[3] <= 0;
-	       regfile[4] <= 0;  regfile[5] <= 0;  regfile[6] <= 0;  regfile[7] <= 0;
-	       regfile[8] <= 0;  regfile[9] <= 0;  regfile[10] <= 0; regfile[11] <= 0;
-	       regfile[12] <= 0; regfile[13] <= 0; regfile[14] <= 0; regfile[15] <= 0;
-	       regfile[16] <= 0; regfile[17] <= 0; regfile[18] <= 0; regfile[19] <= 0;
-	       regfile[20] <= 0; regfile[21] <= 0; regfile[22] <= 0; regfile[23] <= 0;
-	       regfile[24] <= 0; regfile[25] <= 0; regfile[26] <= 0; regfile[27] <= 0;
-	       regfile[28] <= 0; regfile[29] <= 0; regfile[30] <= 0; regfile[31] <= 0;
-      end 
-      else if (we)
-	           regfile[add1] <= din1;
+    always @(posedge clk)
+        if (reset) begin
+	        regfile[0] <= 0;  regfile[1] <= 0;  regfile[2] <= 0;  regfile[3] <= 0;
+	        regfile[4] <= 0;  regfile[5] <= 0;  regfile[6] <= 0;  regfile[7] <= 0;
+	        regfile[8] <= 0;  regfile[9] <= 0;  regfile[10] <= 0; regfile[11] <= 0;
+	        regfile[12] <= 0; regfile[13] <= 0; regfile[14] <= 0; regfile[15] <= 0;
+	        regfile[16] <= 0; regfile[17] <= 0; regfile[18] <= 0; regfile[19] <= 0;
+	        regfile[20] <= 0; regfile[21] <= 0; regfile[22] <= 0; regfile[23] <= 0;
+	        regfile[24] <= 0; regfile[25] <= 0; regfile[26] <= 0; regfile[27] <= 0;
+	        regfile[28] <= 0; regfile[29] <= 0; regfile[30] <= 0; regfile[31] <= 0;
+        end 
+        else if (we)
+	        regfile[add1] <= din1;
 
 endmodule
