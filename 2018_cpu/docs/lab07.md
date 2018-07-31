@@ -11,7 +11,7 @@ This lab delves deeper into the key FF control signals reset and enable.
 
 ## Reset
 
-The exercise gets you to implement two flip flops, one with synchronous reset, one
+This exercise gets you to implement two flip flops, one with synchronous reset, one
 with asynchronous reset.
 
 1. Locate the rtl/ff_07.v file

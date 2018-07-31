@@ -22,7 +22,14 @@ and issuing:
 
 If you copied the project files from USB stick you will need to repeat the process.
 
-Copy all the project files into your Vivado project. This is a repeat of Lab02.
+## Playtime project
+
+The next few labs get you to play with code that ultimately will not be directly
+used in the AVR core. It is recommended that you create a new Vivado project,
+call it 'playtime', to run the new few labs.
+
+1. Start Vivado
+1. Create a new RTL project named **playtime** (see lab02.md for details)
 
 ## Basic Operations
 
