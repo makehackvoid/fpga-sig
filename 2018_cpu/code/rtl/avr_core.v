@@ -30,18 +30,18 @@
 module avr_core(
     input               clk,
     input               reset,
-    output  [3:0]       pc,
-    output [15:0]       instruction,
-    output  [5:0]       opcode,
-    output  [4:0]       rf1,
-    output  [4:0]       rf2,
-    output  [7:0]       a,
-    output  [7:0]       b,
-    output  [7:0]       sum
+    output  [3:0]       pc,             // program counter
+    output [15:0]       instruction,    // current instruction
+    output  [5:0]       opcode,         // current opcode
+    output  [4:0]       rf1,            // register file port 1 address
+    output  [4:0]       rf2,            // register file port 2 address
+    output  [7:0]       a,              // ALU port A
+    output  [7:0]       b,              // ALU port B
+    output  [7:0]       sum             // ALU output
     );
 
-    wire    [4:0]       rd;
-    wire    [4:0]       rr;
+    wire    [4:0]       rd;             // destination register (DR - 2 of 32 format)
+    wire    [4:0]       rr;             // source register (DR - 2 of 32 format)
     
     // TODO - instantiate a program counter as U1
 
@@ -50,7 +50,7 @@ module avr_core(
     // Opcode is top 6 bits of the instruction
     assign opcode = instruction[15:10];
 
-    // Register addresses from register direct format instructions     
+    // Register addresses from direct register format instructions     
     assign rd = instruction[8:4]; 
     assign rr = { instruction[9], instruction[3:0] };  // concatenation
 
