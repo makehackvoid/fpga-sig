@@ -46,8 +46,8 @@ With the Load Immediate (ldi) instruction we need to make three datapath changes
 first change involves the destination register Rd. Immediate instructions only have 4
 bits available to store Rd so the high order bit (4) is assumed to be 1.
 
-The simplest way to implement this is to use a multiplexer based on the ?:
-operator (rf1 is set by continuous assignment).
+The simplest way to implement this is to use a multiplexer based on the conditional 
+operator (?:). Note - rf1 is set using continuous assignment.
 
 1. Edit avr_core.v
 1. Locate the variables section (under module ports)
@@ -55,7 +55,7 @@ operator (rf1 is set by continuous assignment).
 1. Locate the control_rom instantiation (U3)
 1. Wire the *rdmux_ctrl* port to *immediate*
 1. Locate "assign rf1 = rd"
-1. Alter this to read "assign rf1 = immediate ? { 1'b1, rd[3:0] } : rd;"
+1. Alter this to read "assign rf1 = immediate ? { 1'b1, instruction[7:4] } : rd;"
 1. Run behavioral simulation
 1. Verify the following:
 
