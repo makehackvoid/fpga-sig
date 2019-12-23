@@ -99,9 +99,10 @@ not  U1 (g, g_n);
 nand U2 (y_n, a, b);
 ~~~
 
-With the general form you first select the gate type and name. Names are
-for identification/documentation purposes. They need to be unique within
-a module. The are handy when examining synthesis output as they allow
+With the general form you first select the gate type and name. Supported
+gate types are not, and, nand, or, nor, xor and xnor. Names are
+for identification/documentation purposes. Names need to be unique within
+the module. The are handy when examining synthesis output as they allow
 matching between the tool output and the original source.
 
 The net list follows in parentheses. The gate output **must** be
@@ -109,13 +110,30 @@ specified first. Everything after that is regarded as a gate input.
 There are no practical limits on the number of inputs, the tool will scale
 accordingly.
 
-###
+### Nets
+
+In Verilog nets are an abstract way of describing connections. If you're
+familiar with object oriented languages I'd describe a net as an
+abstract data type.
+
+Most of the time you're going to be working with *wires* and *registers*.
+When working at the structural level the net of choice is the *wire*.
+
+Looking at the module definition given above you'll find no mention of
+either wire or reg. That's because the default net type is wire.
+
+Nets a, b, g_n and y_n are of *wire* type.
+
 ### Structural Implementation
 
 Following the datasheet schematic exactly we can divide the gates into
 three columns and then work top to bottom. Column 1 has three inverters,
-column 2 has two inverters and colun 3 has four NAND gates.  
+column 2 has two inverters and column 3 has four nand gates.
+
+We will also need to declare some additional nets.
+
 ~~~verilog
+// Intermediate nets
 wire g, a_n, b_n, a_buf, b_buf;
 	 
 not u1 (g, g_n);    // Column 1
@@ -131,10 +149,124 @@ nand u8 (y_n[2], g, a_n, b_buf);
 nand u9 (y_n[3], g, a_buf, b_buf);
 ~~~
 
+Take some time to compare the code above to the schematic.
+
 ## Testing
 
-## Dataflow Implementation
+Testing for the decoder involves creating a Verilog testbench and then
+running it in a behavioural simulation. As a general rule you base the
+testbench name off the module you are testing. For example, the
+testbench for decoder2of4 is called decoder2of4_tb.
 
-## Register Transfer Language
+You need to create nets for input and output. Inputs need to be of
+*reg* type because they are assigned values inside an initial block.
+Output nets can be of *wire* type.
+
+~~~verilog
+module decoder2of4_tb;
+
+    // Inputs
+    reg g_n, a, b;
+
+    // Outputs
+    wire [3:0] y_n;
+
+    // Instantiate module under test
+    decoder2of4 u1 ( .g_n(g_n), .a(a), .b(b), .y_n(y_n) );
+
+    initial begin
+        // Device disabled      
+        g_n = 1;
+        b = 0; a = 0; #10;
+        b = 0; a = 1; #10;
+        b = 1; a = 0; #10;
+        b = 1; a = 1; #10;
+
+        // Device enabled      
+        g_n = 0;
+        b = 0; a = 0; #10;
+        b = 0; a = 1; #10;
+        b = 1; a = 0; #10;
+        b = 1; a = 1; #10;
+    end
+
+endmodule
+~~~
+
+The test then instantiates the module under test. Instantiation syntax
+is flexible and allows input/output values to be supplied either by
+position or by name. When we instantiated the primitive gates the
+positional form was used, i.e. output first, then inputs. With the
+testbench we are using name matching format. For example, ".a(a)" means
+connect the decoder2of4 input 'a' (.a) to the 'a' net.
+
+The rest of the initial block runs through all posiible input
+combinations of g_n, a and b.
+
+Test output can be viewed using the graph output by the behavioural
+simulation.
+
+## Dataflow Level
+
+Dataflow is the level of abstraction over structural/gate. It relies on
+the use of *assign* statements along with logic equations. Verilog uses
+the term 'continuous assignment' to refer to assign statements. They are
+normally used to model combinational logic.
+
+Logic equations use expression syntax similar to the C programming language.
+
+~~~verilog
+// General form
+assign <net> = <expression> ;
+
+// Examples
+assign x = ! b;
+assign y = a & b;
+~~~
+
+Synthesis of the first example will create an inverter, like C, ! is read
+as 'not'. Synthesis of the second example results in an AND gate being
+created.
+
+### Dataflow Implementation
+
+Implementation of the SN74139 decoder using the dataflow level of abstraction
+looks like this:
+
+~~~verilog
+assign y_n[0] = !g_n & !b & !a;
+assign y_n[1] = !g_n & !b & a;
+assign y_n[2] = !g_n & b & !a;
+assign y_n[3] = !g_n & b & a;
+~~~
+
+Basically a bunch of logic equations for each output. Using the '!' results
+in net inversion, i.e. with a single character in dataflow we can acheive
+something that required an entire line (gate) when using the structural
+abstraction level.
+
+Compare the dataflow implementation with the structural/gate level
+implementation. Is it shorter? Is it clearer? Which of these would be
+easier to maintain?
+
+## Behavioural Level
+
+Moving up another level we encounter the behavioural abstraction layer.
+This is probably the most difficult layer to understand for two reasons:
+
+1. Not everything expressed at this layer can be turned into hardware,
+i.e. not all behavioural code is synthesisable
+1. It uses procedural constructs such as if/then/else/case and loops.
+
+The term Register Transfer Level (RTL) is often used to describe the
+subset of behavioural level code that can actually be synthesised.
+
+Behavioural level code can be used to specify combinational,
+sequential and test bench logic.
+
+### Procedural Blocks
+
+Verilog uses the initial and always block contructs to wrap 
+### Wire v Reg
 
 ## Behind the scenes

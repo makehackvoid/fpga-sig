@@ -47,4 +47,3 @@ module decoder2of4_tb;
     end
 
 endmodule
-
