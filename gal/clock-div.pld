@@ -1,0 +1,27 @@
+Name     clock-div ;
+PartNo   01 ;
+Date     05/03/2020 ;
+Revision 01 ;
+Designer Stephen Davies ;
+Company  Make Hack Void ;
+Assembly None ;
+Location  ;
+Device   g16v8a ;
+
+/*********************************************************/
+/* A simple example taking a 4MHz global clock           */
+/* and dividing it down to 2 and 1 MHz clocks.           */
+/*********************************************************/
+
+/* *************** INPUT PINS ****************************/
+
+PIN   1  = clk4M                 ; /* 4MHz global clock  */ 
+
+/* *************** OUTPUT PINS ***************************/
+
+PIN  19 =  clk2M                 ; /* 2MHz tap           */
+PIN  18 =  clk1M                 ; /* 1MHz tap           */
+
+clk2M.d = ! clk2M ;
+
+clk1M.d = clk1M $ clk2M ;          /* Toggle when previous stage is at terminal count */
