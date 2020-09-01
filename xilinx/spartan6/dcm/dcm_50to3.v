@@ -30,6 +30,11 @@ module dcm_50to3 (
    )
    DCM_CLKGEN_inst (
       .CLKFX(clkout),        // 1-bit output: Generated clock output
+      .CLKFX180(),           // 1-bit output: Generated clock output 180 degree out of phase from CLKFX.
+      .CLKFXDV(),            // 1-bit output: Divided clock output
+      .LOCKED(),             // 1-bit output: Locked output
+      .PROGDONE(),           // 1-bit output: Active high output to indicate the successful re-programming
+      .STATUS(),             // 2-bit output: DCM_CLKGEN status
       .CLKIN(clkin),         // 1-bit input: Input clock
       .FREEZEDCM(1'b0),      // 1-bit input: Prevents frequency adjustments to input clock
       .PROGCLK(1'b0),        // 1-bit input: Clock input for M/D reconfiguration
