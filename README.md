@@ -18,7 +18,7 @@ technology platforms gal, cpld etc.
 
 1. 2018_cpu       - RISC processor based on Atmel AVR
 1. 2019_ricoh2A03 - Sound effects processor
-1. 2020_sap       - Malvino & Brown - Simple As Possible
+1. 2020_sap       - Malvino & Brown - Simple As Possible processors
 
 ## Technology Index
 
