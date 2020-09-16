@@ -33,31 +33,32 @@
 //                 Digital Computer Electronics
 //                 Malvino, Albert Paul
 //                 Jerald A Brown
-//                 ISBN ???-?????
+//                 ISBN 0-02-800594-5
+//                 https://archive.org/download/367026792DigitalComputerElectronicsAlbertPaulMalvinoAndJeraldABrownPdf1/367026792-Digital-Computer-Electronics-Albert-Paul-Malvino-and-Jerald-A-Brown-pdf%20%281%29.pdf
 //
-// Notes:          Because the original design was TTL based the polarity of
+// Notes:          Because the original design was TTL based, the polarity of
 //                 various control signals is mixed depending upon, presumably,
 //                 the polarity of the TTL chips used in their design.
 //
 //                 FPGAs, by their design, do not require high or low active
 //                 signals so the convention used in this design is to opt
-//                 for positive logic all through. That is, all latch enables
-//                 etc. are active high.
+//                 for positive logic throughout. That is, all control signal
+//                 such as latch enables etc. are active high.
 //
 //                 The M&B design uses a central bus and connects the various
 //                 modules together using tri-state drivers. An excellent
 //                 choice for TTL, however, this will not work inside an FPGA.
 //                 FPGA's support tri-state in their I/O buffers (external
 //                 connections) but not internally. The M&B circuit has been
-//                 altered accordingly, in general this means using a multiplexor
+//                 altered accordingly, in general this means using a multiplexer
 //                 and running multiple signals, e.g. muxing the PC and IR
 //                 into the RAM. See Verilog code for more details.
 //
 //////////////////////////////////////////////////////////////////////////////////
 
 module sap1(
-    input        clk,      // system clock
-    input        clr,      // clear (reset)
+    input        clk,      // System clock
+    input        clr,      // Clear (reset)
     output [3:0] PC,       // PC value
     output [3:0] ADR,      // MAR latch output
     output [7:0] IR,       // IR latch output
@@ -71,20 +72,32 @@ module sap1(
     output       T6
     );
 
-    reg    [3:0] mar;  // memory address register
-    reg    [7:0] ir;   // instruction register
+    // Signals that map directly to M&B's design
+    reg [3:0]    mar;      // Memory Address Register (MAR)
+    reg [7:0]    ir;       // Instruction Register (IR)
+    reg [7:0]    a_reg;    // Accumulator A
+    reg [7:0]    b_reg;    // Accumulator B
+    reg [7:0]    out_reg;  // Output Register
 
-    wire       lm;
-    wire       cp;
-    wire       li;
-    wire       su;
-    wire       a_sel;
-    wire [3:0] pc;
-    wire [7:0] ram_data;
-    wire [6:1] t;
-    wire [7:0] alu_out;
+    wire         lm;       // MAR latch
+    wire         cp;       // PC count enable
+    wire         li;       // IR latch
+    wire         su;       // Subtract
+    wire         lo;       // Output register latch
+    wire [7:0]   alu_out;  // Adder/subtractor output
+    wire [6:1]   t;        // T states in vector format. T1 = t[1] etc.
+    wire [3:0]   pc;       // Program counter output
+    wire [7:0]   ram_data; // RAM output
+
+    // Signals not in the original M&B design
+    wire [3:0]   mar_mux;  // Output from MAR mux, input to RAM
+    wire         mar_sel;  // MAR mux select line - 0 = PC, 1 = IR
+    wire [7:0]   a_mux;    // Output from accum A mux
+    wire         a_sel;    // Accum A mux select line
     
     // Program counter
+    // ---------------
+    // Changed from M&B design, output enable (Ep) has been removed due to no W bus.
     pcounter program_counter (
         .clk(clk),
         .clr(clr),
@@ -92,30 +105,39 @@ module sap1(
         .pc(pc)
     );
 
-    // MAR - mux to select either PC output or IR low bits
-    wire [3:0] mar_mux;
-    wire       mar_sel;
-
+    // MAR input mux
+    // -------------
+    // Not in original design. Replaces W bus.
+    // Selects either PC (T1) or IR low order bits (T4).
     assign mar_mux = (mar_sel) ? ir[3:0] : pc;
 
-    // MAR
+    // Memory Address Register (MAR)
+    // -----------------------------
+    // Latches on clk rising edge when lm true. Same as M&B.
     always @(posedge clk)
         if (lm)
             mar <= mar_mux;
 
-    // RAM
+    // 16x8 RAM
+    // --------
+    // Changed from M&B design, chip enable (/CE) has been removed due to no W bus.
     ram ram (
         .a(mar),
         .d(ram_data)
     );
 
-    // Instruction register
+    // Instruction register (IR)
+    // -------------------------
+    // Changed from M&B design, ram_data direct connect due to no W bus.
     always @(posedge clk)
         if (clr)
             ir[7:4] <= 4'b0000;
         else if (li)
             ir <= ram_data;
 
+    // Controller/Sequencer
+    // --------------------
+    // See controller.v for detail.
     controller controller (
         .clk(clk),
         .clr(clr),
@@ -128,36 +150,57 @@ module sap1(
         .a_sel(a_sel),
         .la(la),
         .lb(lb),
-        .su(su)
+        .su(su),
+        .lo(lo)
     );
 
-    // A register
-    reg [7:0] a_reg;
-
-    // A reg mux - select either ram_data or alu write back
-    wire [7:0] a_mux;
-
+    // Accumulator A input mux
+    // -----------------------
+    // Not in original design. Replaces W bus.
+    // Selects either ram_data (LDA in T5) or ALU output (ADD/SUB in T6).
     assign a_mux = (a_sel) ? alu_out : ram_data;
     
+    // Accumulator A
+    // -------------
+    // Changed from M&B design, due to no W bus.
+    // Input is taken from the A mux.
+    // Latch control same as M&B.
     always @(posedge clk)
         if (la)
             a_reg <= a_mux;
 
-    // B register
-    reg [7:0] b_reg;
+    // Adder/Subtractor (a basic ALU) 
+    // ------------------------------
+    // Changed from M&B design. Verilog handles add/sub without having to
+    // resort to full adders or XOR inversion. Result will still be the same.
+    assign alu_out = (su) ?
+                     a_reg - b_reg   // SUB
+                   : a_reg + b_reg;  // ADD
 
+    // Accumulator B
+    // -------------
+    // Changed from M&B design. No W bus so it takes its input direct from the RAM.
+    // With SAP-1 this is the only possible datapath. 
+    // Latch control same as M&B.
     always @(posedge clk)
         if (lb)
             b_reg <= ram_data;
 
-    // ALU
-    assign alu_out = (su) ? a_reg - b_reg : a_reg + b_reg;
+    // Output Register
+    // ---------------
+    // Changed from M&B design. No W bus so it takes its input directly from
+    // accumulator A. 
+    always @(posedge clk)
+        if (lo)
+            out_reg <= a_reg;
 
     assign PC = pc;
     assign ADR = mar;
     assign IR = ir;
     assign A = a_reg;
     assign B = b_reg;
+
+    // T state breakout
     assign T1 = t[1];
     assign T2 = t[2];
     assign T3 = t[3];
