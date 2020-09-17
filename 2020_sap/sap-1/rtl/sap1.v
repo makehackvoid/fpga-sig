@@ -64,6 +64,7 @@ module sap1(
     output [7:0] IR,       // IR latch output
     output [7:0] A,        // A register
     output [7:0] B,        // B register
+    output [7:0] OUT,      // Output register
     output       T1,       // T states...
     output       T2,
     output       T3,
@@ -191,7 +192,9 @@ module sap1(
     // Changed from M&B design. No W bus so it takes its input directly from
     // accumulator A. 
     always @(posedge clk)
-        if (lo)
+        if (clr)
+            out_reg <= 0;
+        else if (lo)
             out_reg <= a_reg;
 
     assign PC = pc;
@@ -199,6 +202,7 @@ module sap1(
     assign IR = ir;
     assign A = a_reg;
     assign B = b_reg;
+    assign OUT = out_reg;
 
     // T state breakout
     assign T1 = t[1];

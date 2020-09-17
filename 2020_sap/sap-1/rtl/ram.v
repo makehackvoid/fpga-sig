@@ -30,7 +30,7 @@
 // Description:    Implements the 16x8 RAM.
 //
 //                 Contains the program from M&B CH10.
-//                 OUT = 9 + 16 + 20 - 32
+//                 OUT = 16 + 20 + 24 - 32
 //
 //                 Design missing the /CE signal due to FPGAs not
 //                 supporting internal tri-state.

@@ -41,11 +41,11 @@ module sap1_tb;
 
 	// Outputs
 	wire [3:0] PC;
-    wire       MMX_SEL;
 	wire [3:0] ADR;
 	wire [7:0] IR;
 	wire [7:0] A;
 	wire [7:0] B;
+	wire [7:0] OUT;
 	wire       T1, T2, T3, T4, T5, T6;
 
 	// Instantiate the Unit Under Test (UUT)
@@ -53,11 +53,11 @@ module sap1_tb;
 		.clk(clk), 
 		.clr(clr),
 		.PC(PC),
-        .MMX_SEL(MMX_SEL),
         .ADR(ADR),
 		.IR(IR),
         .A(A),
         .B(B),
+        .OUT(OUT),
 		.T1(T1),
 		.T2(T2),
 		.T3(T3),
