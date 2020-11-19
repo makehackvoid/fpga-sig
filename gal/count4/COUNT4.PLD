@@ -1,0 +1,30 @@
+Name     count4 ;
+PartNo   00 ;
+Date     19/11/2020 ;
+Revision 01 ;
+Designer Stephen ;
+Company  MHV ;
+Assembly None ;
+Location  ;
+Device   g22v10 ;
+
+/* *************** INPUT PINS *********************/
+PIN 1   = clk                     ; /*                                 */ 
+PIN 2   = reset                   ; /*                                 */
+
+/* *************** OUTPUT PINS *********************/
+PIN [20..23] = [y3..0]            ; /*                                 */ 
+
+FIELD count  = [y3..0];
+
+count.ar     = reset;
+count.sp     = 'b'0;
+
+SEQUENCE count {
+  $REPEAT i = [0..15]
+    present 'd'{i}
+      default next 'd'{(i + 1)%(16)};
+  $REPEND
+}
+
+
