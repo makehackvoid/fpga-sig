@@ -60,7 +60,7 @@ module sap1(
     input        clk,      // System clock
     input        clr,      // Clear (reset)
     output [3:0] PC,       // PC value
-    output [3:0] ADR,      // MAR latch output
+    output [3:0] MAR,      // MAR latch output
     output [7:0] IR,       // IR latch output
     output [7:0] A,        // A register
     output [7:0] B,        // B register
@@ -116,7 +116,9 @@ module sap1(
     // -----------------------------
     // Latches on clk rising edge when lm true. Same as M&B.
     always @(posedge clk)
-        if (lm)
+        if (clr)
+            mar <= 0;
+        else if (lm)
             mar <= mar_mux;
 
     // 16x8 RAM
@@ -167,7 +169,9 @@ module sap1(
     // Input is taken from the A mux.
     // Latch control same as M&B.
     always @(posedge clk)
-        if (la)
+        if (clr)
+            a_reg <= 0;
+        else if (la)
             a_reg <= a_mux;
 
     // Adder/Subtractor (a basic ALU) 
@@ -184,7 +188,9 @@ module sap1(
     // With SAP-1 this is the only possible datapath. 
     // Latch control same as M&B.
     always @(posedge clk)
-        if (lb)
+        if (clr)
+            b_reg <= 0;
+        else if (lb)
             b_reg <= ram_data;
 
     // Output Register
@@ -198,7 +204,7 @@ module sap1(
             out_reg <= a_reg;
 
     assign PC = pc;
-    assign ADR = mar;
+    assign MAR = mar;
     assign IR = ir;
     assign A = a_reg;
     assign B = b_reg;

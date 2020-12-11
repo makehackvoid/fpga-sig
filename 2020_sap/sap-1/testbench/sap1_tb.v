@@ -41,7 +41,7 @@ module sap1_tb;
 
 	// Outputs
 	wire [3:0] PC;
-	wire [3:0] ADR;
+	wire [3:0] MAR;
 	wire [7:0] IR;
 	wire [7:0] A;
 	wire [7:0] B;
@@ -53,7 +53,7 @@ module sap1_tb;
 		.clk(clk), 
 		.clr(clr),
 		.PC(PC),
-        .ADR(ADR),
+        .MAR(MAR),
 		.IR(IR),
         .A(A),
         .B(B),
