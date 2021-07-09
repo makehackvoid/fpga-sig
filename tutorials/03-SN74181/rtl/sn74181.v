@@ -43,9 +43,9 @@ module sn74181(
     // logic diagrams left hand side.
     wire   [3:0] p_n;
     wire   [3:0] g_n;
-    integer      i;
+    genvar       i;
 
-    for (i = 0; i < 3; i = i + 1) begin
+    for (i = 0; i < 4; i = i + 1) begin
         assign g_n[i] = ! (( a[i] &&  s[3] &&  b[i]) || ( a[i] &&  s[2] && !b[i]));
         assign p_n[i] = ! ((!b[i] &&  s[1]) || ( b[i] &&  s[0]) || a[i]);
     end
@@ -64,9 +64,9 @@ module sn74181(
                     )
                 );
 
-    assign z = ci_n && (&g_n);
+    assign z = !(ci_n && (&g_n));
 
-    assign co_n = y_int && z;
+    assign co_n = !(y_int && z);
 
     assign x = ! (&g_n);
 
