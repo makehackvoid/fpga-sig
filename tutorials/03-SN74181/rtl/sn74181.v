@@ -31,64 +31,79 @@ module sn74181(
     input  [3:0] b,       // 4 bit input nybble
     input  [3:0] s,       // function select lines
     input        m,       // 0 = arithmetic, 1 = logic
-    input        ci_n,
-    output [3:0] f,
-    output       a_eq_b
+    input        ci_n,    // carry in, active low
+    output [3:0] f,       // alu out
+    output       aeqb,    // A = B
+    output       x,
+    output       y,
+    output       co_n     // carry out (Cn+4), active low
     );
 
     // Equations for first input layer i.e. the AND/NOR column at the
     // logic diagrams left hand side.
-    // Reading top to bottom.
+    wire   [3:0] p_n;
+    wire   [3:0] g_n;
+    integer      i;
 
-    // A3 & B3
-    wire fab3_1, fab3_2;
-    assign fab3_2 = ! (( a[3] &&  s[3] &&  b[3]) ||
-                       ( a[3] &&  s[2] && !b[3]));
-    assign fab3_1 = ! ((!b[3] &&  s[1]) ||
-                       ( b[3] &&  s[0]) ||
-                         a[3]);
+    for (i = 0; i < 3; i = i + 1) begin
+        assign g_n[i] = ! (( a[i] &&  s[3] &&  b[i]) || ( a[i] &&  s[2] && !b[i]));
+        assign p_n[i] = ! ((!b[i] &&  s[1]) || ( b[i] &&  s[0]) || a[i]);
+    end
 
-    // A2 & B2
-    wire fab2_1, fab2_2;
-    assign fab2_2 = ! (( a[2] &&  s[3] &&  b[2]) ||
-                       ( a[2] &&  s[2] && !b[2]));
-    assign fab2_1 = ! ((!b[2] &&  s[1]) ||
-                       ( b[2] &&  s[0]) ||
-                         a[2]);
-
-    // A1 & B1
-    wire fab1_1, fab1_2;
-    assign fab1_2 = ! (( a[1] &&  s[3] &&  b[1]) ||
-                       ( a[1] &&  s[2] && !b[1]));
-    assign fab1_1 = ! ((!b[1] &&  s[1]) ||
-                       ( b[1] &&  s[0]) ||
-                         a[1]);
-
-    // A0 & B0
-    wire fab0_1, fab0_2;
-    assign fab0_2 = ! (( a[0] &&  s[3] &&  b[0]) ||
-                       ( a[0] &&  s[2] && !b[0]));
-    assign fab0_1 = ! ((!b[0] &&  s[1]) ||
-                       ( b[0] &&  s[0]) ||
-                         a[0]);
-
+    // Equations for carry chain layer
     wire [3:0] f_int;
+    wire       y_int;
+    wire       z;         // part of carry chain, not really sure what it is
 
-    assign f_int[2] = ( (fab2_1 ^ fab2_2) ^
-                       !((!m &&  ci_n &&  fab0_2) ||
-                         (!m && ) ||
-                         (!m &&  fab1_1))
-                      );
+    assign y_int = (
+                    !(
+                        (p_n[3]) ||
+                        (g_n[3] && p_n[2]) ||
+                        (g_n[3] && g_n[2] && p_n[1]) ||
+                        (g_n[3] && g_n[2] && g_n[1] && p_n[0])
+                    )
+                );
 
-    assign f_int[1] = ( (fab1_1 ^ fab1_2) ^
-                       !((!m &&  ci_n &&  fab0_2) ||
-                         (!m &&  fab0_1))
-                      );
+    assign z = ci_n && (&g_n);
 
-    assign f_int[0] = ( (fab0_1 ^ fab0_2) ^
-                       !(!m && ci_n));
+    assign co_n = y_int && z;
 
-    assign a_eq_b = &f_int;
+    assign x = ! (&g_n);
+
+    assign f_int[3] = (
+                        (p_n[3] ^ g_n[3]) ^
+                        !(
+                            (!m &&  g_n[2] &&  g_n[1] &&  g_n[0] &&  ci_n) ||
+                            (!m &&  p_n[0] &&  g_n[2] &&  g_n[1]) ||
+                            (!m &&  p_n[1] &&  g_n[2]) ||
+                            (!m &&  p_n[2])
+                        )
+                    );
+
+    assign f_int[2] = (
+                        (p_n[2] ^ g_n[2]) ^
+                        !(
+                            (!m &&  g_n[1] &&  g_n[0] &&  ci_n) ||
+                            (!m &&  p_n[0] &&  g_n[1]) ||
+                            (!m &&  p_n[1])
+                        )
+                    );
+
+    assign f_int[1] = (
+                        (p_n[1] ^ g_n[1]) ^
+                        !(
+                            (!m &&  g_n[0] &&  ci_n) ||
+                            (!m &&  p_n[0])
+                        )
+                    );
+
+    assign f_int[0] = (
+                        (p_n[0] ^ g_n[0]) ^
+                        !(!m && ci_n)
+                    );
+
+    assign y = y_int;
     assign f = f_int;
+    assign aeqb = &f_int;
 
 endmodule
