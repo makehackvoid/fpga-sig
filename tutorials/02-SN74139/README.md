@@ -42,9 +42,10 @@ module decoder2of4(
     // implementation goes here
 
 endmodule
+<figcaption>Fig 1 - Module Template</figcaption>
 ~~~
 
-This matches the datasheet exactly.
+This matches the '139 datasheet exactly.
 
 Note the use of a naming convention to indicate active low inputs and
 outputs e.g. g_n and y_n.
@@ -73,7 +74,7 @@ designers. You could specify individual N and P channel transistors to
 create your own inverter.
 
 Vendors such as Xilinx do not support this level of abstraction in
-their tools, i.e. switch level is part of the lanaguage but not all
+their tools, i.e. switch level is part of the language but not all
 tools support it.
 
 ## Structural Level
@@ -88,11 +89,11 @@ together. In Verilog you connect components using *nets*.
 
 ### Primitive Instantiation
 
-Basic gates are known as primitives. They are built-in to the lanaguage.
+Basic gates are known as primitives. They are built into Verilog.
 
 ~~~verilog
 // General form
-<primitive> <name> (<net1>, <net2>...);
+<primitive> <instance name> (<net1>, <net2>...);
 
 // Examples
 not  U1 (g, g_n);
@@ -100,10 +101,10 @@ nand U2 (y_n, a, b);
 ~~~
 
 With the general form you first select the gate type and name. Supported
-gate types are not, and, nand, or, nor, xor and xnor. Names are
-for identification/documentation purposes. Names need to be unique within
-the module. The are handy when examining synthesis output as they allow
-matching between the tool output and the original source.
+gate types are not, and, nand, or, nor, xor and xnor. Instance names are
+for identification/documentation purposes. They need to be unique within
+the module. Instance names are handy when examining synthesis output as 
+they allow matching between the tool output and the original source.
 
 The net list follows in parentheses. The gate output **must** be
 specified first. Everything after that is regarded as a gate input.
