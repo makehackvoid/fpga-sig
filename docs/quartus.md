@@ -2,6 +2,8 @@
 
 Created: 19 Oct 2021
 
+Stephen Davies
+
 ## Overview
 
 Just a quick note to document some 'gotchas' around installing
@@ -18,5 +20,5 @@ disk minimum is suggested.
 Once the OS is installed you need the following 32 bit libraries:
 
 ~~~bash
-$ sudo yum install libXft*i686 libXext*i686 ncurses-libs*i686 bzip2*i686
+sudo yum install libXft*i686 libXext*i686 ncurses-libs*i686 bzip2*i686
 ~~~
