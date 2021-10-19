@@ -10,13 +10,13 @@ attempting to install it on Fedora 34 and was having troubles with
 missing libraries. I managed to find these
 [Debian Instructions](https://github.com/Jefferson-Lopes/quartus-installation).
 
-According to the Quartus Prime install notes Red Hat 7 with KDE is 
+According to the Quartus Prime install notes, Red Hat 7 with KDE is 
 Linux platform of choice. I can confirm that the software installs 
-with CentOS 7 + KDE plasma desktop.
+with CentOS 7 + KDE plasma desktop. Quartus Prime is BIG, a 40Gb
+disk minimum is suggested. 
 
-Once installed:
+Once the OS is installed you need the following 32 bit libraries:
 
 ~~~bash
 $ sudo yum install libXft*i686 libXext*i686 ncurses-libs*i686 bzip2*i686
 ~~~
-
