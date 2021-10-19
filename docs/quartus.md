@@ -22,3 +22,6 @@ Once the OS is installed you need the following 32 bit libraries:
 ~~~bash
 sudo yum install libXft*i686 libXext*i686 ncurses-libs*i686 bzip2*i686
 ~~~
+
+Once the 32 libraries are installed follow the Quartus Prime
+installation notes. The software should install and run without issue.
