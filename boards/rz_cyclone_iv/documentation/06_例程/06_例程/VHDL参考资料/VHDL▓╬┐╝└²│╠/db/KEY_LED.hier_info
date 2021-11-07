@@ -1,0 +1,5 @@
+|KEY_LED
+key_in => led_out.DATAIN
+led_out <= key_in.DB_MAX_OUTPUT_PORT_TYPE
+
+
