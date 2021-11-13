@@ -13,13 +13,13 @@
 
 module example02_tb;
 
-    reg i, t;
+    reg i, t;                  // i=input, t=tri-state control
 
     wire o, y;
 
-	 assign o = t ? i : 1'bz;
+    assign o = t ? i : 1'bz;
 
-    not u1 ( y, o );
+    not u1 ( y, o );           // why? to show how a gate handles a Z input value
 
     initial begin
         i = 0; t = 0; #100;    // output o in high-impedance state (z)
