@@ -26,27 +26,27 @@ module decoder2of4(
     );
 
     // Structural
-	s139 u1 (
+//	s139 u1 (
+//		.g_n(g_n), 
+//		.a(a), 
+//		.b(b), 
+//		.y_n(y_n)
+//	);
+
+    // Dataflow
+//	df139 u1 (
+//		.g_n(g_n), 
+//		.a(a), 
+//		.b(b), 
+//		.y_n(y_n)
+//	);
+
+    // Behavioural
+	b139 u1 (
 		.g_n(g_n), 
 		.a(a), 
 		.b(b), 
 		.y_n(y_n)
 	);
-
-    // Dataflow
-	//df139 u1 (
-	//	.g_n(g_n), 
-	//	.a(a), 
-	//	.b(b), 
-	//	.y_n(y_n)
-	//);
-
-    // Behavioural
-	//b139 u1 (
-	//	.g_n(g_n), 
-	//	.a(a), 
-	//	.b(b), 
-	//	.y_n(y_n)
-	//);
 
 endmodule

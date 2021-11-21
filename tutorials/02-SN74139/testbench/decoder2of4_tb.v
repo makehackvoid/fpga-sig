@@ -44,6 +44,7 @@ module decoder2of4_tb;
         b = 0; a = 1; #10;
         b = 1; a = 0; #10;
         b = 1; a = 1; #10;
+        $stop();
     end
 
 endmodule

@@ -1,4 +1,5 @@
 `timescale 1ns / 1ps
+
 //////////////////////////////////////////////////////////////////////////////////
 // Company:        Make, Hack, Void
 // Engineer:       Stephen Davies
@@ -14,6 +15,7 @@
 //                 Gate structure is a direct copy of the Texas Instruments
 //                 datasheet.
 //////////////////////////////////////////////////////////////////////////////////
+
 module s139(
     input g_n,
     input a,
@@ -23,16 +25,16 @@ module s139(
 
     wire g, a_n, b_n, a_buf, b_buf;
 	 
-    not u1 (g, g_n);
+    not u1 (g,   g_n);
     not u2 (a_n, a);
     not u3 (b_n, b);
 
     not u4 (a_buf, a_n);
     not u5 (b_buf, b_n);
 	 
-    nand u6 (y_n[0], g, a_n, b_n);
-    nand u7 (y_n[1], g, b_n, a_buf);
-    nand u8 (y_n[2], g, a_n, b_buf);
+    nand u6 (y_n[0], g, a_n,   b_n);
+    nand u7 (y_n[1], g, b_n,   a_buf);
+    nand u8 (y_n[2], g, a_n,   b_buf);
     nand u9 (y_n[3], g, a_buf, b_buf);
 
 endmodule

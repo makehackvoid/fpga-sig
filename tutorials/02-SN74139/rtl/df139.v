@@ -28,9 +28,9 @@ module df139(
     output [3:0] y_n
     );
 
-    assign y_n[0] = !g_n & !b & !a;
-    assign y_n[1] = !g_n & !b & a;
-    assign y_n[2] = !g_n & b & !a;
-    assign y_n[3] = !g_n & b & a;
+    assign y_n[0] = !(!g_n & !b & !a);
+    assign y_n[1] = !(!g_n & !b &  a);
+    assign y_n[2] = !(!g_n &  b & !a);
+    assign y_n[3] = !(!g_n &  b &  a);
 
 endmodule
