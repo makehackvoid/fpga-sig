@@ -52,13 +52,13 @@
 #NET ""            LOC = "P18" ;  # IO3-11
 #NET ""            LOC = "P19" ;  # IO3-14
 #NET ""            LOC = "P20" ;  # IO3-15
+#NET ""            LOC = "P24" ;  # IO3-16
 #NET ""            LOC = "P22" ;  # IO3-17
 
 # Function Block 4
-#NET ""            LOC = "P24" ;  # IO4-2
-#NET ""            LOC = "P25" ;  # IO4-5
-#NET ""            LOC = "P26" ;  # IO4-8
-#NET ""            LOC = "P27" ;  # IO4-9
+#NET ""            LOC = "P25" ;  # IO4-2
+#NET ""            LOC = "P26" ;  # IO4-5
+#NET ""            LOC = "P27" ;  # IO4-8
 #NET ""            LOC = "P28" ;  # IO4-11
 #NET ""            LOC = "P29" ;  # IO4-14
 #NET ""            LOC = "P33" ;  # IO4-15
