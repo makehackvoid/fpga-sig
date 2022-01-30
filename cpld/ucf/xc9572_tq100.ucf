@@ -1,0 +1,103 @@
+#
+# Template UCF for Xilinx XC9572 in TQ100 package.
+#
+# Stephen Davies
+# 30 January, 2022
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# Function block 1
+#NET ""            LOC = "P16" ;  # IO1-1
+#NET ""            LOC = "P13" ;  # IO1-2
+#NET ""            LOC = "P18" ;  # IO1-3
+#NET ""            LOC = "P20" ;  # IO1-4
+#NET ""            LOC = "P14" ;  # IO1-5
+#NET ""            LOC = "P15" ;  # IO1-6
+#NET ""            LOC = "P25" ;  # IO1-7
+#NET ""            LOC = "P17" ;  # IO1-8
+#NET ""            LOC = "P22" ;  # IO1-9  GCK1
+#NET ""            LOC = "P28" ;  # IO1-10
+#NET ""            LOC = "P23" ;  # IO1-11 GCK2
+#NET ""            LOC = "P33" ;  # IO1-12
+#NET ""            LOC = "P36" ;  # IO1-13
+#NET ""            LOC = "P27" ;  # IO1-14 GCK3
+#NET ""            LOC = "P29" ;  # IO1-15
+#NET ""            LOC = "P39" ;  # IO1-16
+#NET ""            LOC = "P30" ;  # IO1-17
+#NET ""            LOC = "P40" ;  # IO1-18
+
+# Function Block 2
+#NET ""            LOC = "P87" ;  # IO2-1
+#NET ""            LOC = "P94" ;  # IO2-2
+#NET ""            LOC = "P91" ;  # IO2-3
+#NET ""            LOC = "P93" ;  # IO2-4
+#NET ""            LOC = "P95" ;  # IO2-5
+#NET ""            LOC = "P96" ;  # IO2-6
+#NET ""            LOC = "P3"  ;  # IO2-7  GTS1
+#NET ""            LOC = "P97" ;  # IO2-8
+#NET ""            LOC = "P99" ;  # IO2-9  GSR
+#NET ""            LOC = "P1"  ;  # IO2-10
+#NET ""            LOC = "P4"  ;  # IO2-11 GTS2
+#NET ""            LOC = "P6"  ;  # IO2-12
+#NET ""            LOC = "P8"  ;  # IO2-13
+#NET ""            LOC = "P9"  ;  # IO2-14
+#NET ""            LOC = "P11" ;  # IO2-15
+#NET ""            LOC = "P10" ;  # IO2-16
+#NET ""            LOC = "P12" ;  # IO2-17
+#NET ""            LOC = "P92" ;  # IO2-18
+
+# Function Block 3
+#NET ""            LOC = "P41" ;  # IO3-1
+#NET ""            LOC = "P32" ;  # IO3-2
+#NET ""            LOC = "P49" ;  # IO3-3
+#NET ""            LOC = "P50" ;  # IO3-4
+#NET ""            LOC = "P35" ;  # IO3-5
+#NET ""            LOC = "P53" ;  # IO3-6
+#NET ""            LOC = "P54" ;  # IO3-7
+#NET ""            LOC = "P37" ;  # IO3-8
+#NET ""            LOC = "P42" ;  # IO3-9
+#NET ""            LOC = "P60" ;  # IO3-10
+#NET ""            LOC = "P52" ;  # IO3-11
+#NET ""            LOC = "P61" ;  # IO3-12
+#NET ""            LOC = "P63" ;  # IO3-13
+#NET ""            LOC = "P55" ;  # IO3-14
+#NET ""            LOC = "P56" ;  # IO3-15
+#NET ""            LOC = "P64" ;  # IO3-16
+#NET ""            LOC = "P58" ;  # IO3-17
+#NET ""            LOC = "P59" ;  # IO3-18
+
+# Function Block 4
+#NET ""            LOC = "P65" ;  # IO4-1
+#NET ""            LOC = "P67" ;  # IO4-2
+#NET ""            LOC = "P71" ;  # IO4-3
+#NET ""            LOC = "P72" ;  # IO4-4
+#NET ""            LOC = "P68" ;  # IO4-5
+#NET ""            LOC = "P76" ;  # IO4-6
+#NET ""            LOC = "P77" ;  # IO4-7
+#NET ""            LOC = "P70" ;  # IO4-8
+#NET ""            LOC = "P66" ;  # IO4-9
+#NET ""            LOC = "P81" ;  # IO4-10
+#NET ""            LOC = "P74" ;  # IO4-11
+#NET ""            LOC = "P82" ;  # IO4-12
+#NET ""            LOC = "P85" ;  # IO4-13
+#NET ""            LOC = "P78" ;  # IO4-14
+#NET ""            LOC = "P89" ;  # IO4-15
+#NET ""            LOC = "P86" ;  # IO4-16
+#NET ""            LOC = "P90" ;  # IO4-17
+#NET ""            LOC = "P79" ;  # IO4-18
